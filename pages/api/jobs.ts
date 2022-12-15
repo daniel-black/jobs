@@ -8,5 +8,10 @@ export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<JobsApiResponse>
 ) {
-  res.status(200).json({ name: 'hi' });
+
+  const apiKey = process.env.USAJOBS_API_KEY;
+  console.log(`api key: "${apiKey}"`);
+
+  // this is dumb but I'm doing it to see if vercel has my env vars like they should
+  res.status(200).json({ name: `apiKey: "${apiKey}"` });
 }
