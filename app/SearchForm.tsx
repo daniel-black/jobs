@@ -1,6 +1,7 @@
 'use client';
 
 import { FormEvent, useState } from "react";
+import { useRouter } from 'next/navigation';
 import { JobsApiResponse } from "../lib/types/jobsApiTypes";
 import { getBaseUrl } from "../lib/utils/general-utils";
 
@@ -8,6 +9,7 @@ export default function SearchForm(): JSX.Element {
   const [title, setTitle] = useState('');
   const [location, setLocation] = useState('');
   const [keyword, setKeyword] = useState('');
+  const router = useRouter();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -17,16 +19,18 @@ export default function SearchForm(): JSX.Element {
     urlSearchParams.append('LocationName', location);
     urlSearchParams.append('Keyword', keyword);
 
-    const url = `${getBaseUrl()}/api/jobs?${urlSearchParams.toString()}`;
+    // const url = `${getBaseUrl()}/api/jobs?${urlSearchParams.toString()}`;
 
-    const response = await fetch(url);
-    const { result } = await response.json() as JobsApiResponse;
+    // const response = await fetch(url);
+    // const { result } = await response.json() as JobsApiResponse;
 
-    console.log(result);
+    // console.log(result);
+
+    router.push(`/search?${urlSearchParams.toString()}`);
   }
 
   return (
-    <section className='bg-stone-100 opacity-90 rounded-lg px-8 py-10 shadow-lg max-w-xl'>
+    <section className='bg-stone-100 opacity-90 rounded-lg px-8 py-10 shadow-lg max-w-xl border border-stone-200'>
       <form onSubmit={handleSubmit}>
         <div className='space-y-5 text-lg'>
           {/* Title and Location */}

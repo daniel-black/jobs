@@ -20,7 +20,7 @@ export interface Job {
   title: string;
   location: Location[];
   summary: string;
-  pay?: Pay;
+  pay: Pay;
   isRemote: boolean;
 };
 
