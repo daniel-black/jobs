@@ -36,7 +36,7 @@ export default async function handler(
     if (typeof query[k] !== 'string')
       throw new Error('Parameter values must be strings');
 
-    urlSearchParams.append(k, query[k]);
+    urlSearchParams.append(k, String(query[k]));
   }
 
   const url = usaJobsApi + '?' + urlSearchParams.toString();
