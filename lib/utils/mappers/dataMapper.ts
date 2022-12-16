@@ -2,9 +2,6 @@ import { Job, Pay, Results, Location } from "../../types/jobsApiTypes";
 import { PositionLocation, PositionRemuneration, SearchResultItem, UsaJobsSearchResult } from "../../types/usajobsApiTypes";
 
 export function mapUsaJobsSearchResults(results: UsaJobsSearchResult): Results {
-  console.log('top mapper:');
-  
-  console.log(results)
   return {
     count: results.SearchResultCount,
     countAll: results.SearchResultCountAll,
