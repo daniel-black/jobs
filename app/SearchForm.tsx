@@ -1,17 +1,23 @@
 'use client';
 
 import { FormEvent, useState } from "react";
+import { getBaseUrl, isDev } from "../lib/utils/general-utils";
 
 export default function SearchForm(): JSX.Element {
   const [title, setTitle] = useState('');
   const [location, setLocation] = useState('');
   const [keyword, setKeyword] = useState('');
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(`title: ${title}`);
-    console.log(`location: ${location}`);
-    console.log(`keyword: ${keyword}`);
+
+    const urlSearchParams = new URLSearchParams();
+    urlSearchParams.append('PositionTitle', title);
+    urlSearchParams.append('LocationName', location);
+    urlSearchParams.append('Keyword', keyword);
+
+    const url = `${getBaseUrl()}/api/jobs?${urlSearchParams.toString()}`;
+    alert(url);
   }
 
   return (
