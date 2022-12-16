@@ -1,7 +1,8 @@
 'use client';
 
 import { FormEvent, useState } from "react";
-import { getBaseUrl, isDev } from "../lib/utils/general-utils";
+import { JobsApiResponse } from "../lib/types/jobsApiTypes";
+import { getBaseUrl } from "../lib/utils/general-utils";
 
 export default function SearchForm(): JSX.Element {
   const [title, setTitle] = useState('');
@@ -17,7 +18,11 @@ export default function SearchForm(): JSX.Element {
     urlSearchParams.append('Keyword', keyword);
 
     const url = `${getBaseUrl()}/api/jobs?${urlSearchParams.toString()}`;
-    alert(url);
+
+    const response = await fetch(url);
+    const { result } = await response.json() as JobsApiResponse;
+
+    console.log(result);
   }
 
   return (
@@ -32,7 +37,7 @@ export default function SearchForm(): JSX.Element {
                 onChange={(e) => setTitle(e.target.value)}
                 type="text" 
                 placeholder='Job Title' 
-                className='job-search-input shadow-inner w-full'
+                className='job-search-input shadow-inner w-full text-stone-700'
               />
             </div>
             <div className="w-full">
@@ -41,7 +46,7 @@ export default function SearchForm(): JSX.Element {
                 onChange={(e) => setLocation(e.target.value)}
                 type="text" 
                 placeholder='Location' 
-                className='job-search-input shadow-inner w-full'
+                className='job-search-input shadow-inner w-full text-stone-700'
               />
             </div>
           </div>
@@ -52,7 +57,7 @@ export default function SearchForm(): JSX.Element {
               onChange={(e) => setKeyword(e.target.value)}
               type="text" 
               placeholder='Any relevant keywords' 
-              className='job-search-input w-full shadow-inner'
+              className='job-search-input w-full shadow-inner text-stone-700'
             />
           </div>
           {/* Submit button */}

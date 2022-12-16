@@ -1,10 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { headers, usaJobsApi } from '../../lib/constants';
+import { ApiError, JobsApiResponse } from '../../lib/types/jobsApiTypes';
+import { UsaJobsApiResponse } from '../../lib/types/usajobsApiTypes';
 import { createUrlSearchParams } from '../../lib/utils/api-utils';
-
-type JobsApiResponse = {
-  result: any;
-};
+import { mapUsaJobsSearchResults } from '../../lib/utils/mappers/dataMapper';
 
 export default async function handler(
   req: NextApiRequest,
@@ -14,7 +13,15 @@ export default async function handler(
   const url = usaJobsApi + '?' + urlSearchParams.toString();
 
   const request = await fetch(url, { method: 'GET', headers });
-  const data = await request.json();
+
+  if (!request.ok) {
+    const apiError: ApiError = { code: request.status, message: request.statusText };
+    res.status(request.status).json({ result: apiError });
+  }
+
+  const usaJobsApiResponse = await request.json() as UsaJobsApiResponse;  
+
+  const data = mapUsaJobsSearchResults(usaJobsApiResponse.SearchResult);
 
   res.status(200).json({ result: data });
 }

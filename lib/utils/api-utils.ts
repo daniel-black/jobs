@@ -25,5 +25,7 @@ export function createUrlSearchParams(query:
     urlSearchParams.append(k, String(query[k]));
   }
 
+  urlSearchParams.append('ResultsPerPage', '10');
+
   return urlSearchParams;
 }
