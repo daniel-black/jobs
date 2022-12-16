@@ -1,6 +1,9 @@
+import SearchForm from "./SearchForm";
 
 export default function Home() {
   return (
-    <div>Hello world</div>
+    <div className='p-4'>
+      <SearchForm />
+    </div>
   );
 }

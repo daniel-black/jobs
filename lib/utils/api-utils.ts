@@ -4,6 +4,8 @@ export function isValidParameter(p: string): boolean {
   return PARAMETERS.includes(p);
 }
 
+// this is kinda messy. should also take in res object
+// and send errors back with it.
 export function createUrlSearchParams(query: 
   Partial<{[key: string]: string | string[];}>
 ): URLSearchParams {

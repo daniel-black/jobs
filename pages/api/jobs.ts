@@ -10,11 +10,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<JobsApiResponse>
 ) {
-  const API_KEY = process.env.USAJOBS_API_KEY;
-  if (!API_KEY) {
-    throw new Error('No API key present');
-  }
-
   const urlSearchParams = createUrlSearchParams(req.query);
   const url = usaJobsApi + '?' + urlSearchParams.toString();
 
