@@ -26,7 +26,7 @@ export default function SearchForm(): JSX.Element {
   }
 
   return (
-    <section className='bg-stone-100 rounded px-8 py-10 shadow max-w-xl'>
+    <section className='bg-stone-100 opacity-90 rounded-lg px-8 py-10 shadow-lg max-w-xl'>
       <form onSubmit={handleSubmit}>
         <div className='space-y-5 text-lg'>
           {/* Title and Location */}
