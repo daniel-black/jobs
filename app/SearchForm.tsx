@@ -2,8 +2,6 @@
 
 import { FormEvent, useState } from "react";
 import { useRouter } from 'next/navigation';
-import { JobsApiResponse } from "../lib/types/jobsApiTypes";
-import { getBaseUrl } from "../lib/utils/general-utils";
 
 export default function SearchForm(): JSX.Element {
   const [title, setTitle] = useState('');
@@ -18,13 +16,6 @@ export default function SearchForm(): JSX.Element {
     urlSearchParams.append('PositionTitle', title);
     urlSearchParams.append('LocationName', location);
     urlSearchParams.append('Keyword', keyword);
-
-    // const url = `${getBaseUrl()}/api/jobs?${urlSearchParams.toString()}`;
-
-    // const response = await fetch(url);
-    // const { result } = await response.json() as JobsApiResponse;
-
-    // console.log(result);
 
     router.push(`/search?${urlSearchParams.toString()}`);
   }

@@ -31,6 +31,7 @@ export default async function SearchPage({ searchParams } : {
   }
 
   const { result } = await response.json() as JobsApiResponse;
+  console.log(result);
 
   if (result.hasOwnProperty('code')) {
     return (
