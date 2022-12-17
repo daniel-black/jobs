@@ -9,6 +9,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<JobsApiResponse>
 ) {
+  console.log('API HIT!!')
   const urlSearchParams = createUrlSearchParams(req.query);
   const url = usaJobsApi + '?' + urlSearchParams.toString();
 
