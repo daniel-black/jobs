@@ -2,14 +2,14 @@
 // import { getBaseUrl } from "../../lib/utils/general-utils";
 // import JobListing from "./JobListing";
 
-type SearchParamsType = {
-  PositionTitle?: string;
-  LocationName?: string;
-  Keyword?: string;
-};
+// type SearchParamsType = {
+//   PositionTitle?: string;
+//   LocationName?: string;
+//   Keyword?: string;
+// };
 
 export default async function SearchPage({ searchParams } : {
-  searchParams?: SearchParamsType
+  searchParams?: { [key: string]: string | string[] | undefined };
 }) {
 
   return (
