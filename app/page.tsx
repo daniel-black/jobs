@@ -1,5 +1,4 @@
-import SearchForm from "./SearchForm";
-import Link from 'next/link';
+import LandingSearchForm from "./LandingSearchForm";
 import Blob from './Blob';
 
 export default function Home() {
@@ -14,7 +13,7 @@ export default function Home() {
           </span>
           <span className='font-extrabold text-emerald-500'>.</span>
         </h1>
-        <SearchForm />
+        <LandingSearchForm />
       </div>
     </div>
   );
