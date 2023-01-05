@@ -5,15 +5,15 @@ import { getBaseUrl } from '../../lib/utils/general-utils';
 import { Results as ApiResults } from '../../lib/types/jobsApiTypes';
 import useSwr from 'swr';
 import JobListing from './JobListing';
+import ResultsLine from './ResultsLine';
 
 const fetcher = async (url: string) => {
   const res = await fetch(url);
   return await res.json();
 }
 
-const Results = () => {
+const Results = (): JSX.Element => {
   const sp = useSearchParams();
-
   const url = `${getBaseUrl()}/api/jobs?${sp.toString()}`
   const { data, error, isLoading } = useSwr(url, fetcher);
 
@@ -28,7 +28,9 @@ const Results = () => {
 
   if (isLoading) {
     return (
-      <div>Loading...</div>
+      <div className='mt-20 flex justify-center'>
+        <div className='w-20 h-20 bg-stone-300 animate-ping rounded-full'></div>
+      </div>
     );
   }
 
@@ -37,18 +39,13 @@ const Results = () => {
 
   console.log(result);
 
-  const getResultsLine = () => {
-    if (count === 0) return 'No results found';
-    if (count === countAll) return `Viewing all ${count} results`;
-    return `Viewing ${count} of ${countAll} results`;
-  }
-
   return (
-    <div>
-      <p>{getResultsLine()}</p>
+    <div className='py-6 space-y-6'>
+      <ResultsLine count={count} countAll={countAll} title={sp.get('PositionTitle')} location={sp.get('LocationName')} />
       {jobs && jobs.map((job) => <JobListing job={job} key={job.id} />)}
     </div>
   );
 }
 
 export default Results;
+

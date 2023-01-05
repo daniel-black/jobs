@@ -6,4 +6,8 @@
   .job-search-input {
     @apply px-4 py-2 rounded bg-stone-200;
   }
+
+  .results-line {
+    @apply text-center text-stone-500 text-sm;
+  }
 }
