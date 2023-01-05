@@ -16,8 +16,8 @@ export default function SearchResults() {
   const searchParams = useSearchParams();
   const urlSearchParams = new URLSearchParams();
   PARAMETERS.map((p) => urlSearchParams.append(p, searchParams.get(p) || ''));
-  const url = `${getBaseUrl()}/api/jobs?${urlSearchParams.toString()}`
 
+  const url = `${getBaseUrl()}/api/jobs?${urlSearchParams.toString()}`
   const { data, error, isLoading } = useSwr(url, fetcher);
 
   if (error) {

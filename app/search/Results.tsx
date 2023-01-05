@@ -1,22 +1,54 @@
 'use client';
 
 import { useSearchParams } from 'next/navigation';
+import { getBaseUrl } from '../../lib/utils/general-utils';
+import { Results as ApiResults } from '../../lib/types/jobsApiTypes';
+import useSwr from 'swr';
+import JobListing from './JobListing';
+
+const fetcher = async (url: string) => {
+  const res = await fetch(url);
+  return await res.json();
+}
 
 const Results = () => {
   const sp = useSearchParams();
 
-  const title = sp.has('PositionTitle') ? sp.get('PositionTitle') : null;
-  const location = sp.has('LocationName') ? sp.get('LocationName') : null;
-  const keyword = sp.has('Keyword') ? sp.get('Keyword') : null;
+  const url = `${getBaseUrl()}/api/jobs?${sp.toString()}`
+  const { data, error, isLoading } = useSwr(url, fetcher);
+
+  if (error) {
+    return (
+      <div>
+        <p>Uh oh an error occurred</p>
+        <pre>{JSON.stringify(error)}</pre>
+      </div>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <div>Loading...</div>
+    );
+  }
+
+  const { result }: { result: ApiResults } = data;
+  const { count, countAll, jobs } = result;
+
+  console.log(result);
+
+  const getResultsLine = () => {
+    if (count === 0) return 'No results found';
+    if (count === countAll) return `Viewing all ${count} results`;
+    return `Viewing ${count} of ${countAll} results`;
+  }
 
   return (
     <div>
-      I am results
-      <p>title: {title}</p>
-      <p>location: {location}</p>
-      <p>keyword: {keyword}</p>
+      <p>{getResultsLine()}</p>
+      {jobs && jobs.map((job) => <JobListing job={job} key={job.id} />)}
     </div>
-  )
+  );
 }
 
 export default Results;
