@@ -19,8 +19,7 @@ export default function Payment({ pay }: PaymentProps) {
       <span className="text-stone-600 font-semibold italic">{min}</span>
       &nbsp;~&nbsp;
       <span className="text-stone-600 font-semibold italic">{max}</span>
-      {' '}per&nbsp;
-      <span className="text-stone-600 font-semibold italic">{pay.rate === 'h' ? 'hour' : 'year'}</span>
+      {' '}per&nbsp;{pay.rate === 'h' ? 'hour' : 'year'}
     </div>
   );
 }
