@@ -1,17 +1,10 @@
-// import SearchResults from "./SearchResults";
+import Results from "./Results";
 
-export default async function SearchPage({ searchParams }: {
-  searchParams?: {
-    PositionTitle?: string,
-    LocationName?: string,
-    Keyword?: string,
-  }
-}) {
+export default async function SearchPage() {
   return (
     <div>
-      <p>searchParams:</p>
-      {/* <SearchResults /> */}
-      <pre>{JSON.stringify(searchParams, null, 2)}</pre>
+      <p>search page</p>
+      <Results />
     </div>
   );
 }
