@@ -1,4 +1,4 @@
-// import SearchForm from "./SearchForm";
+import SearchForm from "./SearchForm";
 import Link from 'next/link';
 import Blob from './Blob';
 
@@ -14,10 +14,7 @@ export default function Home() {
           </span>
           <span className='font-extrabold text-emerald-500'>.</span>
         </h1>
-        <Link href='/search'>
-          Search
-        </Link>
-        {/* <SearchForm /> */}
+        <SearchForm />
       </div>
     </div>
   );

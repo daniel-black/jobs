@@ -1,4 +1,4 @@
-import Search from "./Search";
+import SearchFormWrapper from "./SearchFormWrapper";
 
 export default function SearchLayout({
   children,
@@ -7,7 +7,7 @@ export default function SearchLayout({
 }) {
   return (
     <main>
-      <Search />
+      <SearchFormWrapper />
       {children}
     </main>
   );
