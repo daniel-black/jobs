@@ -6,7 +6,6 @@ export default function SearchLayout({
 }) {
   return (
     <main>
-      <p>Hello I am the layout</p>
       {children}
     </main>
   );

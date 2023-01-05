@@ -3,21 +3,26 @@
 import { FormEvent, useState } from "react";
 import { useRouter } from 'next/navigation';
 
+function createSearchParams(title: string, location: string, keyword: string): string {
+  const urlSearchParams = new URLSearchParams();
+
+  if (title !== '') urlSearchParams.append('PositionTitle', title);
+  if (location !== '') urlSearchParams.append('LocationName', location);
+  if (keyword !== '') urlSearchParams.append('Keyword', keyword);
+
+  return urlSearchParams.toString();
+}
+
 export default function SearchForm(): JSX.Element {
   const [title, setTitle] = useState('');
   const [location, setLocation] = useState('');
   const [keyword, setKeyword] = useState('');
   const router = useRouter();
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    const urlSearchParams = new URLSearchParams();
-    urlSearchParams.append('PositionTitle', title);
-    urlSearchParams.append('LocationName', location);
-    urlSearchParams.append('Keyword', keyword);
-
-    router.push(`/search?${urlSearchParams.toString()}`);
+    const queryString = createSearchParams(title, location, keyword);
+    router.push(`/search?${queryString}`);
   }
 
   return (
