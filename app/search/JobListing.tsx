@@ -1,4 +1,4 @@
-import { Job } from "../../lib/types/jobsApiTypes";
+import { Job, Location } from "../../lib/types/jobsApiTypes";
 import { currencyFormatter } from "../../lib/utils/currency-utils";
 
 type JobListingProps = { job: Job };
@@ -9,27 +9,36 @@ export default function JobListing({ job }: JobListingProps) {
   const min = currencyFormatter.format(parseFloat(pay.min));
   const max = currencyFormatter.format(parseFloat(pay.max));
 
-  const renderLocations = () => {
-    if (location.length === 0) return null;
-    if (location.length >= 10) {
-      return <span className="bg-slate-300 px-3 py-0.5 rounded-full">{location.length} total locations</span>
-    }
-    return (
-      <div className="flex flex-wrap gap-1">
-        {location.map(l => (
-          <span key={l.displayName} className="bg-slate-300 px-3 py-0.5 rounded-full">{l.city}</span>
-        ))}
-      </div>
-    )
-  }
-
   return (
-    <div className="bg-slate-100 rounded px-4 py-2">
-      <h2>{title}</h2>
-      <p className="truncate">{summary}</p>
-      {renderLocations()}
-      <p>{min} - {max} / {pay.rate === 'h' ? 'hr' : 'yr'}</p>
-      <p>{isRemote ? 'Remote' : 'In person'}</p>
+    <div className="bg-stone-100 shadow border border-stone-300 rounded-lg px-4 py-2 space-y-2">
+      <div className="flex justify-between items-center w-full">
+        <h2 className="text-xl font-semibold text-stone-700">{title}</h2>
+        <button className="px-3 py-0.5 rounded-full bg-emerald-200 text-emerald-800">apply</button>
+      </div>
+      <div className="border-t pt-2">
+        <p>{min} - {max} / {pay.rate === 'h' ? 'hr' : 'yr'}</p>
+        <Presence isRemote={isRemote} location={location} />
+      </div>
+    </div>
+  );
+}
+
+type PresenceProps = {
+  isRemote: boolean;
+  location: Location[];
+};
+
+function Presence({ isRemote, location }: PresenceProps) {
+  return (
+    <div className="space-x-2">
+      <span className={`pill ${isRemote ? 'bg-sky-200 text-sky-600': 'bg-violet-200 text-violet-600'}`}>
+        {isRemote ? 'Remote' : 'In-person'}
+      </span>
+      {!isRemote && (
+        <span className="text-sm text-stone-400">
+          {location.length > 1 ? `${location.length} locations` : location[0].city}
+        </span>
+      )}
     </div>
   );
 }
