@@ -1,3 +1,4 @@
+import Search from "./Search";
 
 export default function SearchLayout({
   children,
@@ -6,6 +7,7 @@ export default function SearchLayout({
 }) {
   return (
     <main>
+      <Search />
       {children}
     </main>
   );
