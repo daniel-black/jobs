@@ -1,6 +1,7 @@
 import { JobDetailed, JobsApiResponse } from "../../../lib/types/jobsApiTypes";
 import { currencyFormatter } from "../../../lib/utils/currency-utils";
 import { getBaseUrl } from "../../../lib/utils/general-utils";
+import BackButton from "./BackButton";
 
 export default async function JobPage({ params }: { params: { id: string } }) {
   const url = `${getBaseUrl()}/api/job?id=${params.id}`;
@@ -20,6 +21,7 @@ export default async function JobPage({ params }: { params: { id: string } }) {
 
   return (
     <div className="py-10 px-5 space-y-3">
+      <BackButton />
       <h1 className="text-2xl text-stone-700">{job.title}</h1>
       <p>{min} ~ {max} per {job.pay.rate === 'h' ? 'hour' : 'year'}</p>
       <p>starts {new Date(job.startDate).toLocaleDateString()}, ends {new Date(job.endDate).toLocaleDateString()}</p>
