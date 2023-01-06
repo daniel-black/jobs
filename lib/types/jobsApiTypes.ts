@@ -6,7 +6,7 @@ export type ApiError = {
 };
 
 export type JobsApiResponse = {
-  result: Results | ApiError;
+  result: Results | JobDetailed | ApiError;
 };
 
 export type Results = {

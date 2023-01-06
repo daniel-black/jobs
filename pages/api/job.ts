@@ -1,14 +1,13 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { headers, usaJobsApi } from "../../lib/constants";
-import { ApiError, JobsApiResponse, Results } from "../../lib/types/jobsApiTypes";
+import { ApiError, JobsApiResponse } from "../../lib/types/jobsApiTypes";
 import { UsaJobsApiResponse } from "../../lib/types/usajobsApiTypes";
-import { mapUsaJobsSearchResults } from "../../lib/utils/mappers/dataMapper";
+import { mapSingleJob } from "../../lib/utils/mappers/dataMapper";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<JobsApiResponse>
 ) {
-  console.log(req.query);
   const url = usaJobsApi + '?Keyword=' + req.query.id;
 
   const request = await fetch(url, { method: 'GET', headers });
@@ -18,10 +17,8 @@ export default async function handler(
     res.status(request.status).json({ result: apiError });
   }
 
-  const usaJobsApiResponse = await request.json() as UsaJobsApiResponse;  
+  const usaJobsApiResponse = await request.json() as UsaJobsApiResponse;
+  const detailedJobData = mapSingleJob(usaJobsApiResponse.SearchResult.SearchResultItems[0]);
 
-  // don't actually want to map data down to minimal form. want full data blob
-  const data = mapUsaJobsSearchResults(usaJobsApiResponse.SearchResult);
-
-  res.status(200).json({ result: data });
+  res.status(200).json({ result: detailedJobData });
 }
