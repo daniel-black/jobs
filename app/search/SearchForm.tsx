@@ -23,28 +23,24 @@ const SearchForm = ({ toggleWrapper }: SearchFormProps): JSX.Element => {
   return (
     <form onSubmit={handleSubmit}>
       <div className='space-y-5 text-lg'>
-        {/* Title and Location */}
-        <div className='space-y-5 sm:space-y-0 flex flex-col sm:flex-row sm:space-x-5'>
-          <div className="w-full">
-            <input
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              type="text" 
-              placeholder='Job Title' 
-              className='job-search-input shadow-inner w-full text-stone-700'
-            />
-          </div>
-          <div className="w-full">
-            <input
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-              type="text" 
-              placeholder='Location' 
-              className='job-search-input shadow-inner w-full text-stone-700'
-            />
-          </div>
+        <div>
+          <input
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            type="text" 
+            placeholder='Job Title' 
+            className='job-search-input shadow-inner w-full text-stone-700'
+          />
         </div>
-        {/* Keywords */}
+        <div>
+          <input
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            type="text" 
+            placeholder='Location' 
+            className='job-search-input shadow-inner w-full text-stone-700'
+          />
+        </div>
         <div>
           <input
             value={keyword}
@@ -54,7 +50,6 @@ const SearchForm = ({ toggleWrapper }: SearchFormProps): JSX.Element => {
             className='job-search-input w-full shadow-inner text-stone-700'
           />
         </div>
-        {/* Submit button */}
         <div>
           <input 
             className='job-search-input shadow bg-stone-700 text-stone-50 w-full'

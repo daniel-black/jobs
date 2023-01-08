@@ -41,8 +41,13 @@ const Results = (): JSX.Element => {
 
   return (
     <div className='py-6 space-y-6'>
-      <ResultsLine count={count} countAll={countAll} title={sp.get('PositionTitle')} location={sp.get('LocationName')} />
-      <div className='px-3 space-y-4'>
+      <ResultsLine 
+        count={count}
+        countAll={countAll}
+        title={sp.get('PositionTitle')}
+        location={sp.get('LocationName')}
+      />
+      <div className='px-3 space-y-4 w-full'>
         {jobs && jobs.map((job) => (
           <JobListing job={job} key={job.id} />
         ))}

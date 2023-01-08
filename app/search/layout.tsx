@@ -6,7 +6,7 @@ export default function SearchLayout({
   children: React.ReactNode
 }) {
   return (
-    <main>
+    <main className="flex flex-col sm:flex-row">
       <SearchFormWrapper />
       {children}
     </main>
